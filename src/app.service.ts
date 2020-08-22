@@ -21,7 +21,11 @@ export class AppService {
       throw new HttpException("Internal Server Error",500)
     })
     if(checkDataInDb){
-      throw new HttpException("A user already exists.If you are the user,enter correct password or if you are a new user ,try with another username",400)
+      if(checkDataInDb.Password===input.password){
+        return {userId:checkDataInDb.UserId}
+      }else{
+        throw new HttpException("A user already exists.If you are the user,enter correct password or if you are a new user ,try with another username",400)
+      }
     }else{
       let userEntityModel=new User();
       userEntityModel.Username=input.username;
