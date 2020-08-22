@@ -2,6 +2,7 @@ import { Injectable, OnModuleInit, HttpException } from '@nestjs/common';
 import { createConnection } from 'typeorm';
 import { ConfigModule } from 'src/config/config.module';
 import { ConfigService } from 'src/config/config.service';
+import { User } from './entity/User.entity';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit {
@@ -14,15 +15,15 @@ export class DatabaseService implements OnModuleInit {
       username: this.config.get('DATABASE_USER'),
       password: this.config.get('DATABASE_PASSWORD'),
       database: this.config.get('DATABASE_NAME'),
-      entities: [this.config.get('ENTITY_PATH')],
+      entities: [ User],
       synchronize: false,
       logging: false,
       insecureAuth: true,
     })
-      .then(done => console.log('Connection established'))
-      .catch(err => {
-        console.log(err);
-        throw new HttpException('Connection Error', 500);
-      });
+    .then(done => console.log('Connection established'))
+    .catch(err => {
+      console.log(err);
+      throw new HttpException('Connection Error', 500);
+    });
   }
 }
