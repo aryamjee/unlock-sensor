@@ -2,7 +2,7 @@ import { Injectable, OnModuleInit, HttpException } from '@nestjs/common';
 import { createConnection } from 'typeorm';
 import { ConfigModule } from 'src/config/config.module';
 import { ConfigService } from 'src/config/config.service';
-import { User } from './entity/User.entity';
+import { User } from './entity/user.entity';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit {
